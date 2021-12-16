@@ -22,7 +22,7 @@ public class StartWindowController {
 
     @FXML
     void startGame(ActionEvent event) throws MalformedURLException {
-        Stage primaryStage = new Stage();
+
         URL url = new File("/Users/sandrabachinger-raithofer/IdeaProjects/ElectroGoats2/src/main/java/GameWindow.fxml").toURI().toURL();
         Parent root2 = null;
         try {
@@ -31,10 +31,10 @@ public class StartWindowController {
             e.printStackTrace();
         }
 
-        Scene scene = new Scene(root2, 800, 800);
+        Scene scene = new Scene(root2);
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        Main.window.setScene(scene);
+        Main.window.show();
 
     }
 

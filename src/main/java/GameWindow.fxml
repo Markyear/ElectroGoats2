@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.MeshView?>
-
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameWindowController">
    <children>
-      <MeshView layoutX="277.0" layoutY="175.0" />
+      <BorderPane fx:id="borderPane" layoutX="232.0" layoutY="102.0" prefHeight="173.0" prefWidth="139.0">
+         <center>
+            <HBox fx:id="hboxi" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

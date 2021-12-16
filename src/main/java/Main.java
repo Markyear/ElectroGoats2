@@ -9,15 +9,22 @@ import java.net.URL;
 
 public class Main extends Application {
 
+    public static Stage window = new Stage();
+    public static final int TILE_SIZE = 30;
+
         public static void main(String[] args) {
             launch(args);
         }
 
         public void start(Stage primaryStage) throws Exception {
-            URL url = new File("C:\\Users\\Timeless-Laptop\\Documents\\JavaProjects\\ElectroGoats\\src\\main\\java\\StartWindow.fxml").toURI().toURL();
+            URL url = new File("/Users/sandrabachinger-raithofer/IdeaProjects/ElectroGoats2/src/main/java/StartWindow.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);
-            Scene scene = new Scene(root, 800, 800);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+
+            Scene scene = new Scene(root);
+            window = primaryStage;
+            window.setScene(scene);
+            //Größe des Fensters lässt sich nicht verändern
+            window.setResizable(false);
+            window.show();
         }
 }
