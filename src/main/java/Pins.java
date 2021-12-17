@@ -4,10 +4,19 @@ import javafx.scene.shape.Rectangle;
 
 public class Pins extends Rectangle {
 
+        private boolean amIempty;
 
         private Circle circle;
 
-        public boolean hasPiece() {
+    public void setAmIempty(boolean amIempty) {
+        this.amIempty = amIempty;
+    }
+
+    public boolean isAmIempty() {
+        return amIempty;
+    }
+
+    public boolean hasPiece() {
             return circle != null;
         }
 
@@ -15,11 +24,14 @@ public class Pins extends Rectangle {
             return circle;
         }
 
-        public Pins(int x, int y) {
+        public Pins() {
             setWidth(Main.TILE_SIZE);
             setHeight(Main.TILE_SIZE);
-            this.setFill(Color.LAVENDER);
+            this.setFill(Color.TRANSPARENT);
+            this.setStroke(Color.BLACK);
+            this.amIempty = true;
 
         }
+
 
 }

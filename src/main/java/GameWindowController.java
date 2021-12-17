@@ -1,118 +1,65 @@
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
 
 public class GameWindowController {
 
+
     //zum Verschieben der Kabel
+    //zum Speichern der Mausposition
     double orgSceneX, orgSceneY;
+    //zum Speichern der Ursprungsposition des Kabel während des Verschiebens
     double superorgScenx, superorgSceneY;
 
-    ArrayList<Pins> pinsArrayList = new ArrayList<>();
-
+    //Array mit allen Pins vom Circuit Board
+    Pins[][] circuitArray;
 
         @FXML
         private AnchorPane anchorPane;
 
-        @FXML
-        private BorderPane borderPane;
-
-        @FXML
-        private HBox hboxi;
 
     public void initialize(){
 
-        int x =100;
-        int y = 100;
-        for (int i = 0; i < 8; i++, x = x+Main.TILE_SIZE) {
-            Pins pin = new Pins(10, 10);
-            if (i%2 == 0){
-                pin.setFill(Color.GRAY);}
-                pin.setX(x);
-                pin.setY(y);
-                pinsArrayList.add(pin);
-                System.out.print(pin.getX());
-
-            anchorPane.getChildren().add(pin);}
+    CircuitBoard newCircuitborard = new CircuitBoard(100, 100, 15, 24, 20, anchorPane);
+    circuitArray = newCircuitborard.getPinsBoard();
 
 
-        Circle circle1 = new Circle(100, 400, 10, Color.PURPLE);
-        circle1.setCursor(Cursor.OPEN_HAND);
+        Kabel kabel2 = new Kabel(130, 650, Color.YELLOW, anchorPane);
+        kabel2.getCircle1().setOnMousePressed(mousePressedEventHandler);
+        kabel2.getCircle1().setOnMouseDragged(mouseDraggedEventHandler);
+        kabel2.getCircle1().setOnMouseReleased(mouseDroppedEventHandler);
+        kabel2.getCircle2().setOnMousePressed(mousePressedEventHandler);
+        kabel2.getCircle2().setOnMouseDragged(mouseDraggedEventHandler);
+        kabel2.getCircle2().setOnMouseReleased(mouseDroppedEventHandler);
 
-        Circle circle2 = new Circle(150, 400, 10, Color.PURPLE);
-        circle2.setCursor(Cursor.OPEN_HAND);
-
-        Circle circle3 = new Circle(200, 400, 10, Color.YELLOW);
-        circle3.setCursor(Cursor.OPEN_HAND);
-
-        Circle circle4 = new Circle(250, 400, 10, Color.YELLOW);
-        circle4.setCursor(Cursor.OPEN_HAND);
-
-    Line line1 = connect(circle1, circle2);
-    Line line2 = connect(circle3, circle4);
-        circle1.setOnMousePressed(mousePressedEventHandler);
-        circle1.setOnMouseDragged(mouseDraggedEventHandler);
-        circle1.setOnMouseReleased(mouseDroppedEventHandler);
-        circle2.setOnMousePressed(mousePressedEventHandler);
-        circle2.setOnMouseDragged(mouseDraggedEventHandler);
-        circle2.setOnMouseReleased(mouseDroppedEventHandler);
-        circle3.setOnMousePressed(mousePressedEventHandler);
-        circle3.setOnMouseDragged(mouseDraggedEventHandler);
-        circle3.setOnMouseReleased(mouseDroppedEventHandler);
-        circle4.setOnMousePressed(mousePressedEventHandler);
-        circle4.setOnMouseDragged(mouseDraggedEventHandler);
-        circle4.setOnMouseReleased(mouseDroppedEventHandler);
-
-        circle1.toFront();
-        circle2.toFront();
-        circle3.toFront();
-        circle4.toFront();
-
-    anchorPane.getChildren().addAll(circle1, circle2, circle3, circle4,line1, line2);
-    }
-
-    public Line connect(Circle c1, Circle c2)
-    {
-        Line line = new Line();
-        line.startXProperty().bind(c1.centerXProperty());
-        line.startYProperty().bind(c1.centerYProperty());
-
-        line.endXProperty().bind(c2.centerXProperty());
-        line.endYProperty().bind(c2.centerYProperty());
-
-        Color color = (Color)c1.getFill();
-        line.setStroke(color);
-
-        line.setStrokeWidth(3);
-
-        return line;
+        Kabel kabel1 = new Kabel(100, 650, Color.BLUEVIOLET, anchorPane);
+        kabel1.getCircle1().setOnMousePressed(mousePressedEventHandler);
+        kabel1.getCircle1().setOnMouseDragged(mouseDraggedEventHandler);
+        kabel1.getCircle1().setOnMouseReleased(mouseDroppedEventHandler);
+        kabel1.getCircle2().setOnMousePressed(mousePressedEventHandler);
+        kabel1.getCircle2().setOnMouseDragged(mouseDraggedEventHandler);
+        kabel1.getCircle2().setOnMouseReleased(mouseDroppedEventHandler);
 
     }
 
-    private EventHandler<MouseEvent> mousePressedEventHandler = (t) ->
+
+    public EventHandler<MouseEvent> mousePressedEventHandler = (t) ->
     {
         orgSceneX = t.getSceneX();
         orgSceneY = t.getSceneY();
-        superorgScenx = t.getSceneX();
-        superorgSceneY = t.getSceneY();
-
-// bring the clicked circle to the front
 
         Circle c = (Circle) (t.getSource());
+        superorgScenx = c.getCenterX();
+        superorgSceneY = c.getCenterY();
+
+        //damit anderes Kabel oder Jumper auf den nun frei gewordenen Pin gesetzt werden kann
+        Pins pin = whatPintoSetIsEmptyValue(c.getCenterX(),c.getCenterY());
+        if (pin != null){pin.setAmIempty(true);}
+
         c.toFront();
     };
     private EventHandler<MouseEvent> mouseDraggedEventHandler = (t) ->
@@ -132,11 +79,17 @@ public class GameWindowController {
     private EventHandler<MouseEvent> mouseDroppedEventHandler = (t)->
     {
         Circle c = (Circle) (t.getSource());
-        Pins targetPin = whatPin(c.getCenterX(), c.getCenterY());
+
+        //Kabel wird mittig auf Pin gesetzt, Pin wird auf "besetzt" gesetzt
+        Pins targetPin = whatPinToPutKableOn(c.getCenterX(), c.getCenterY());
 
         if (targetPin == null){
             c.setCenterX(superorgScenx);
             c.setCenterY(superorgSceneY);
+
+            // Falls Kabel wird an Ursprungsort zurückhüpft (da ausgesuchter Ort nicht geht) wird Pin auf "besetzt" geegeben
+            targetPin = whatPintoSetIsEmptyValue(superorgScenx, superorgSceneY);
+            if (targetPin != null){targetPin.setAmIempty(false);}
         }
        else {
             superorgScenx = (targetPin.getX()+(Main.TILE_SIZE/2));
@@ -146,22 +99,50 @@ public class GameWindowController {
 
         }};
 
-    private Pins whatPin(double sceneX, double sceneY) {
+//Methode um Pin zu finden auf den das Kabel mittels Maus gerade gezogen wurde
+    private Pins whatPinToPutKableOn(double sceneX, double sceneY) {
 
-        double leftCornerX;
-        double leftCornery;
+        double leftCornerX = 0;
+        double leftCornery= 0;
+        Pins pin;
 
-        for (Pins pin : pinsArrayList){
-            leftCornerX = pin.getX();
-            leftCornery = pin.getY();
+        for (int i = 0; i < circuitArray.length; i++) {
+            for (int y = 0; y < circuitArray[i].length; y++) {
+                pin = circuitArray[i][y];
+                leftCornerX = pin.getX();
+                leftCornery = pin.getY();
 
-            if (leftCornerX<sceneX && sceneX<(leftCornerX+Main.TILE_SIZE) && leftCornery < sceneY && sceneY<(leftCornery+Main.TILE_SIZE)){
-
-                return pin;
+                if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE) && pin.isAmIempty()) {
+                    pin.setAmIempty(false);
+                    return pin;
+                }
             }
         }
-
-       return null;
+        return null;
     }
+    // Methode damit Pin von dem Kabel genommen wird wieder frei wird, bzw wieder als bestzt gespeichert wird wenn Kabel wieder
+    //auf alte Position zurückhüpft
+    private Pins whatPintoSetIsEmptyValue(double sceneX, double sceneY) {
+
+        double leftCornerX = 0;
+        double leftCornery= 0;
+        double leftCornerXlookingFor = sceneX-(Main.TILE_SIZE/2);
+        double leftCornerylookingfor= sceneY-(Main.TILE_SIZE/2);
+
+        Pins pin;
+        for (int i = 0; i < circuitArray.length; i++) {
+            for (int y = 0; y < circuitArray[i].length; y++) {
+                pin = circuitArray[i][y];
+                leftCornerX = pin.getX();
+                leftCornery = pin.getY();
+
+                if (leftCornerX == leftCornerXlookingFor && leftCornery==leftCornerylookingfor) {
+                    return pin;
+                }
+            }
+        }
+        return null;
+    }
+
 
 }
