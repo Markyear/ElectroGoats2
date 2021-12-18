@@ -30,7 +30,6 @@ public class Pins extends Rectangle {
             this.setFill(Color.TRANSPARENT);
             this.setStroke(Color.BLACK);
             this.amIempty = true;
-
         }
 
 

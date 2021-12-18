@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<AnchorPane fx:id="anchorPane" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameWindowController">
+<AnchorPane fx:id="anchorPane" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameWindowController">
    <children>
       <BorderPane layoutX="-4.0" layoutY="5.0" prefHeight="707.0" prefWidth="600.0" />
    </children>

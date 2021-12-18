@@ -4,7 +4,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
-public class CircuitBoard {
+public class CircuitBoard{
 
 
     private Pins[][] pinsBoard;
@@ -13,6 +13,7 @@ public class CircuitBoard {
 
         this.pinsBoard = createpinsboard(xAchse, yAchse, spalten, zeilen, abstand, anchorPane);
     }
+
 
     public Pins[][] getPinsBoard() {
         return pinsBoard;

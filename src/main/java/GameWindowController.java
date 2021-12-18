@@ -1,5 +1,7 @@
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -17,6 +19,10 @@ public class GameWindowController {
 
     //Array mit allen Pins vom Circuit Board
     Pins[][] circuitArray;
+    Pins[][] microcontrollerArray;
+    Pins[][] kabelstorageArray;
+
+
 
         @FXML
         private AnchorPane anchorPane;
@@ -24,28 +30,35 @@ public class GameWindowController {
 
     public void initialize(){
 
-    CircuitBoard newCircuitborard = new CircuitBoard(100, 100, 15, 24, 20, anchorPane);
+    CircuitBoard newCircuitborard = new CircuitBoard(500, 100, 15, 24, 20, anchorPane);
     circuitArray = newCircuitborard.getPinsBoard();
+    Microcontroller newMicrocontroller = new Microcontroller(20, 200, 4, 15, 180, anchorPane);
+    microcontrollerArray = newMicrocontroller.getPinsBoard();
+    Kabelstorage newKabelstorage = new Kabelstorage(20, 600, 8, 1, 5, anchorPane);
+    kabelstorageArray = newKabelstorage.getPinsBoard();
+
+        Kabel kabel1 = new Kabel(35, 615, Color.BLUEVIOLET, anchorPane);
+        setAllMouseEvents(kabel1);
+        //wherey + 25
+        Kabel kabel2 = new Kabel(60, 615, Color.YELLOW, anchorPane);
+        setAllMouseEvents(kabel2);
+        Kabel kabel3 = new Kabel(85, 615, Color.INDIGO, anchorPane);
+        setAllMouseEvents(kabel3);
+        Kabel kabel4 = new Kabel(110, 615, Color.ORANGE, anchorPane);
+        setAllMouseEvents(kabel4);
+        Kabel kabel5 = new Kabel(135, 615, Color.ORCHID, anchorPane);
+        setAllMouseEvents(kabel5);
+        Kabel kabel6 = new Kabel(160, 615, Color.BURLYWOOD, anchorPane);
+        setAllMouseEvents(kabel6);
+        Kabel kabel7 = new Kabel(185, 615, Color.HOTPINK, anchorPane);
+        setAllMouseEvents(kabel7);
+        Kabel kabel8 = new Kabel(210, 615, Color.GOLD, anchorPane);
+        setAllMouseEvents(kabel8);
 
 
-        Kabel kabel2 = new Kabel(130, 650, Color.YELLOW, anchorPane);
-        kabel2.getCircle1().setOnMousePressed(mousePressedEventHandler);
-        kabel2.getCircle1().setOnMouseDragged(mouseDraggedEventHandler);
-        kabel2.getCircle1().setOnMouseReleased(mouseDroppedEventHandler);
-        kabel2.getCircle2().setOnMousePressed(mousePressedEventHandler);
-        kabel2.getCircle2().setOnMouseDragged(mouseDraggedEventHandler);
-        kabel2.getCircle2().setOnMouseReleased(mouseDroppedEventHandler);
 
-        Kabel kabel1 = new Kabel(100, 650, Color.BLUEVIOLET, anchorPane);
-        kabel1.getCircle1().setOnMousePressed(mousePressedEventHandler);
-        kabel1.getCircle1().setOnMouseDragged(mouseDraggedEventHandler);
-        kabel1.getCircle1().setOnMouseReleased(mouseDroppedEventHandler);
-        kabel1.getCircle2().setOnMousePressed(mousePressedEventHandler);
-        kabel1.getCircle2().setOnMouseDragged(mouseDraggedEventHandler);
-        kabel1.getCircle2().setOnMouseReleased(mouseDroppedEventHandler);
 
     }
-
 
     public EventHandler<MouseEvent> mousePressedEventHandler = (t) ->
     {
@@ -118,6 +131,32 @@ public class GameWindowController {
                 }
             }
         }
+        for (int i = 0; i < microcontrollerArray.length; i++) {
+            for (int y = 0; y < microcontrollerArray[i].length; y++) {
+                pin = microcontrollerArray[i][y];
+                leftCornerX = pin.getX();
+                leftCornery = pin.getY();
+
+                if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE) && pin.isAmIempty()) {
+                    pin.setAmIempty(false);
+                    return pin;
+                }
+            }
+        }
+
+        //am KabelstorageArray können  beide Kabeleldnen abgelegt werden (deshalb fehlt die Abfrage "isempty")
+        for (int i = 0; i < kabelstorageArray.length; i++) {
+            for (int y = 0; y < kabelstorageArray[i].length; y++) {
+                pin = kabelstorageArray[i][y];
+                leftCornerX = pin.getX();
+                leftCornery = pin.getY();
+
+                if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE)) {
+                    pin.setAmIempty(false);
+                    return pin;
+                }
+            }
+        }
         return null;
     }
     // Methode damit Pin von dem Kabel genommen wird wieder frei wird, bzw wieder als bestzt gespeichert wird wenn Kabel wieder
@@ -141,7 +180,29 @@ public class GameWindowController {
                 }
             }
         }
+        for (int i = 0; i < microcontrollerArray.length; i++) {
+            for (int y = 0; y < microcontrollerArray[i].length; y++) {
+                pin = microcontrollerArray[i][y];
+                leftCornerX = pin.getX();
+                leftCornery = pin.getY();
+
+                if (leftCornerX == leftCornerXlookingFor && leftCornery==leftCornerylookingfor) {
+                    return pin;
+                }
+            }
+        }
         return null;
+    }
+//Mouesevent für die Kreise von den Kabel werden gesetzt
+    private void setAllMouseEvents(Kabel kabel){
+        kabel.getCircle1().setOnMousePressed(mousePressedEventHandler);
+        kabel.getCircle1().setOnMouseDragged(mouseDraggedEventHandler);
+        kabel.getCircle1().setOnMouseReleased(mouseDroppedEventHandler);
+        kabel.getCircle2().setOnMousePressed(mousePressedEventHandler);
+        kabel.getCircle2().setOnMouseDragged(mouseDraggedEventHandler);
+        kabel.getCircle2().setOnMouseReleased(mouseDroppedEventHandler);
+
+
     }
 
 

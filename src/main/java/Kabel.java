@@ -13,9 +13,9 @@ public class Kabel {
     Line line;
 
     public Kabel(int wherex, int whery, javafx.scene.paint.Color color, AnchorPane anchorPane) {
+
         circle1 = new Circle(wherex,whery, Main.KABELRADIUS, color);
         circle1.setCursor(Cursor.OPEN_HAND);
-     //   circle1.setOnMousePressed(GameWindowController.mouseDroppedEventHandler);
         circle2 = new Circle(wherex,whery, Main.KABELRADIUS, color);
         circle2.setCursor(Cursor.OPEN_HAND);
         line = connect(circle1, circle2);
