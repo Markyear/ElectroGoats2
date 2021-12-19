@@ -1,10 +1,6 @@
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
-public class Microcontroller {
+public class Microcontroller extends VariousCercuitBoards {
 
     private Pins[][] pinsBoard;
 

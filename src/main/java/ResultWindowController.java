@@ -1,0 +1,2 @@
+public class ResultWindowController {
+}

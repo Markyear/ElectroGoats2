@@ -21,15 +21,9 @@ public class StartWindowController {
     private Button startGame;
 
     @FXML
-    void startGame(ActionEvent event) throws MalformedURLException {
+    void startGame(ActionEvent event) throws IOException {
 
-        URL url = new File("/Users/sandrabachinger-raithofer/IdeaProjects/ElectroGoats2/src/main/java/GameWindow.fxml").toURI().toURL();
-        Parent root2 = null;
-        try {
-            root2 = FXMLLoader.load(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Parent root2 = FXMLLoader.load(getClass().getResource("GameWindow.fxml"));
 
         Scene scene = new Scene(root2);
 

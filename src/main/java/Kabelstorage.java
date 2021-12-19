@@ -1,10 +1,6 @@
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
-public class Kabelstorage {
+public class Kabelstorage extends VariousCercuitBoards {
     private Pins[][] pinsBoard;
 
     public Kabelstorage (int xAchse, int yAchse, int spalten, int zeilen, int abstand, AnchorPane anchorPane) {

@@ -1,14 +1,26 @@
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+// to uses media it hast to be added at modules in gradle -> 'javafx.media'
+// https://stackoverflow.com/questions/62171410/error-package-javafx-scene-media-does-not-exist
+import javafx.scene.media.MediaPlayer;
+
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 
 public class GameWindowController {
+
+    Media goatOK = new Media(getClass().getResource("Goat-Baby-Bah-B-www.fesliyanstudios.com.mp3").toExternalForm());
+    MediaPlayer mediaPlayergoatOK = new MediaPlayer(goatOK);
+    Media goatNotOK = new Media(getClass().getResource("Goat-Short-Cry-B-www.fesliyanstudios.com.mp3").toExternalForm());
+    MediaPlayer mediaPlayergoatNotOK = new MediaPlayer(goatNotOK);
+
 
 
     //zum Verschieben der Kabel
@@ -21,11 +33,18 @@ public class GameWindowController {
     Pins[][] circuitArray;
     Pins[][] microcontrollerArray;
     Pins[][] kabelstorageArray;
+    Kabel [] gameResultKabelArray = new Kabel[Main.KABELAMOUNT];
+    int kabelArrayCount = 0;
+
+
 
 
 
         @FXML
         private AnchorPane anchorPane;
+
+    public GameWindowController() throws MalformedURLException, URISyntaxException {
+    }
 
 
     public void initialize(){
@@ -36,24 +55,29 @@ public class GameWindowController {
     microcontrollerArray = newMicrocontroller.getPinsBoard();
     Kabelstorage newKabelstorage = new Kabelstorage(20, 600, 8, 1, 5, anchorPane);
     kabelstorageArray = newKabelstorage.getPinsBoard();
+    GameResults gameResults = new GameResults(gameResultKabelArray);
 
         Kabel kabel1 = new Kabel(35, 615, Color.BLUEVIOLET, anchorPane);
-        setAllMouseEvents(kabel1);
+        setAllMouseEvents(kabel1, gameResults);
         //wherey + 25
         Kabel kabel2 = new Kabel(60, 615, Color.YELLOW, anchorPane);
-        setAllMouseEvents(kabel2);
+        setAllMouseEvents(kabel2, gameResults);
         Kabel kabel3 = new Kabel(85, 615, Color.INDIGO, anchorPane);
-        setAllMouseEvents(kabel3);
+        setAllMouseEvents(kabel3, gameResults);
         Kabel kabel4 = new Kabel(110, 615, Color.ORANGE, anchorPane);
-        setAllMouseEvents(kabel4);
+        setAllMouseEvents(kabel4, gameResults);
         Kabel kabel5 = new Kabel(135, 615, Color.ORCHID, anchorPane);
-        setAllMouseEvents(kabel5);
+        setAllMouseEvents(kabel5, gameResults);
         Kabel kabel6 = new Kabel(160, 615, Color.BURLYWOOD, anchorPane);
-        setAllMouseEvents(kabel6);
+        setAllMouseEvents(kabel6, gameResults);
         Kabel kabel7 = new Kabel(185, 615, Color.HOTPINK, anchorPane);
-        setAllMouseEvents(kabel7);
+        setAllMouseEvents(kabel7, gameResults);
         Kabel kabel8 = new Kabel(210, 615, Color.GOLD, anchorPane);
-        setAllMouseEvents(kabel8);
+        setAllMouseEvents(kabel8, gameResults);
+
+
+       gameResults.printCircleCoordinates();
+
 
 
 
@@ -74,6 +98,8 @@ public class GameWindowController {
         if (pin != null){pin.setAmIempty(true);}
 
         c.toFront();
+        mediaPlayergoatOK.stop();
+        mediaPlayergoatNotOK.stop();
     };
     private EventHandler<MouseEvent> mouseDraggedEventHandler = (t) ->
     {
@@ -103,12 +129,17 @@ public class GameWindowController {
             // Falls Kabel wird an Ursprungsort zurückhüpft (da ausgesuchter Ort nicht geht) wird Pin auf "besetzt" geegeben
             targetPin = whatPintoSetIsEmptyValue(superorgScenx, superorgSceneY);
             if (targetPin != null){targetPin.setAmIempty(false);}
+            mediaPlayergoatNotOK.play();
+
         }
        else {
             superorgScenx = (targetPin.getX()+(Main.TILE_SIZE/2));
             superorgSceneY = (targetPin.getY()+(Main.TILE_SIZE/2));
             c.setCenterX(superorgScenx);
             c.setCenterY(superorgSceneY);
+
+            mediaPlayergoatOK.play();
+
 
         }};
 
@@ -194,7 +225,9 @@ public class GameWindowController {
         return null;
     }
 //Mouesevent für die Kreise von den Kabel werden gesetzt
-    private void setAllMouseEvents(Kabel kabel){
+    private void setAllMouseEvents(Kabel kabel, GameResults gameResults){
+        gameResults.getSetKabelarray()[kabelArrayCount] = kabel;
+        kabelArrayCount++;
         kabel.getCircle1().setOnMousePressed(mousePressedEventHandler);
         kabel.getCircle1().setOnMouseDragged(mouseDraggedEventHandler);
         kabel.getCircle1().setOnMouseReleased(mouseDroppedEventHandler);

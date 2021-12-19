@@ -4,7 +4,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
-public class CircuitBoard{
+public class CircuitBoard extends VariousCercuitBoards {
 
 
     private Pins[][] pinsBoard;
@@ -18,6 +18,8 @@ public class CircuitBoard{
     public Pins[][] getPinsBoard() {
         return pinsBoard;
     }
+
+
 
 
     // pins werden direkt in der Scene sichtbar gemacht und gleichzeitig in einem zweidimensionalen Arry gespeichert
