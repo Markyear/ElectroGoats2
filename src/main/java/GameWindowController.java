@@ -1,5 +1,10 @@
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -9,25 +14,41 @@ import javafx.scene.shape.Circle;
 // https://stackoverflow.com/questions/62171410/error-package-javafx-scene-media-does-not-exist
 import javafx.scene.media.MediaPlayer;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 
 public class GameWindowController {
+
+    @FXML
+    private Button TryOutButton;
+
+    @FXML
+    private AnchorPane anchorPane;
+
+    @FXML
+    void tryOut(ActionEvent event) throws IOException {
+        Parent root3 = FXMLLoader.load(getClass().getResource("ResultWindow.fxml"));
+
+        Scene scene = new Scene(root3);
+
+        Main.window.setScene(scene);
+        Main.window.show();
+
+    }
 
     Media goatOK = new Media(getClass().getResource("Goat-Baby-Bah-B-www.fesliyanstudios.com.mp3").toExternalForm());
     MediaPlayer mediaPlayergoatOK = new MediaPlayer(goatOK);
     Media goatNotOK = new Media(getClass().getResource("Goat-Short-Cry-B-www.fesliyanstudios.com.mp3").toExternalForm());
     MediaPlayer mediaPlayergoatNotOK = new MediaPlayer(goatNotOK);
 
-
-
+    
     //zum Verschieben der Kabel
     //zum Speichern der Mausposition
     double orgSceneX, orgSceneY;
     //zum Speichern der Ursprungsposition des Kabel während des Verschiebens
-    double superorgScenx, superorgSceneY;
+    double superorgScenX, superorgSceneY;
 
     //Array mit allen Pins vom Circuit Board
     Pins[][] circuitArray;
@@ -36,16 +57,8 @@ public class GameWindowController {
     Kabel [] gameResultKabelArray = new Kabel[Main.KABELAMOUNT];
     int kabelArrayCount = 0;
 
-
-
-
-
-        @FXML
-        private AnchorPane anchorPane;
-
     public GameWindowController() throws MalformedURLException, URISyntaxException {
     }
-
 
     public void initialize(){
 
@@ -78,10 +91,6 @@ public class GameWindowController {
 
        gameResults.printCircleCoordinates();
 
-
-
-
-
     }
 
     public EventHandler<MouseEvent> mousePressedEventHandler = (t) ->
@@ -90,7 +99,7 @@ public class GameWindowController {
         orgSceneY = t.getSceneY();
 
         Circle c = (Circle) (t.getSource());
-        superorgScenx = c.getCenterX();
+        superorgScenX = c.getCenterX();
         superorgSceneY = c.getCenterY();
 
         //damit anderes Kabel oder Jumper auf den nun frei gewordenen Pin gesetzt werden kann
@@ -123,23 +132,22 @@ public class GameWindowController {
         Pins targetPin = whatPinToPutKableOn(c.getCenterX(), c.getCenterY());
 
         if (targetPin == null){
-            c.setCenterX(superorgScenx);
+            c.setCenterX(superorgScenX);
             c.setCenterY(superorgSceneY);
 
             // Falls Kabel wird an Ursprungsort zurückhüpft (da ausgesuchter Ort nicht geht) wird Pin auf "besetzt" geegeben
-            targetPin = whatPintoSetIsEmptyValue(superorgScenx, superorgSceneY);
+            targetPin = whatPintoSetIsEmptyValue(superorgScenX, superorgSceneY);
             if (targetPin != null){targetPin.setAmIempty(false);}
             mediaPlayergoatNotOK.play();
 
         }
        else {
-            superorgScenx = (targetPin.getX()+(Main.TILE_SIZE/2));
+            superorgScenX = (targetPin.getX()+(Main.TILE_SIZE/2));
             superorgSceneY = (targetPin.getY()+(Main.TILE_SIZE/2));
-            c.setCenterX(superorgScenx);
+            c.setCenterX(superorgScenX);
             c.setCenterY(superorgSceneY);
 
             mediaPlayergoatOK.play();
-
 
         }};
 
@@ -194,8 +202,8 @@ public class GameWindowController {
     //auf alte Position zurückhüpft
     private Pins whatPintoSetIsEmptyValue(double sceneX, double sceneY) {
 
-        double leftCornerX = 0;
-        double leftCornery= 0;
+        double leftUpperCornerX = 0;
+        double leftUpperCornerY= 0;
         double leftCornerXlookingFor = sceneX-(Main.TILE_SIZE/2);
         double leftCornerylookingfor= sceneY-(Main.TILE_SIZE/2);
 
@@ -203,10 +211,10 @@ public class GameWindowController {
         for (int i = 0; i < circuitArray.length; i++) {
             for (int y = 0; y < circuitArray[i].length; y++) {
                 pin = circuitArray[i][y];
-                leftCornerX = pin.getX();
-                leftCornery = pin.getY();
+                leftUpperCornerX = pin.getX();
+                leftUpperCornerY = pin.getY();
 
-                if (leftCornerX == leftCornerXlookingFor && leftCornery==leftCornerylookingfor) {
+                if (leftUpperCornerX == leftCornerXlookingFor && leftUpperCornerY==leftCornerylookingfor) {
                     return pin;
                 }
             }
@@ -214,10 +222,10 @@ public class GameWindowController {
         for (int i = 0; i < microcontrollerArray.length; i++) {
             for (int y = 0; y < microcontrollerArray[i].length; y++) {
                 pin = microcontrollerArray[i][y];
-                leftCornerX = pin.getX();
-                leftCornery = pin.getY();
+                leftUpperCornerX = pin.getX();
+                leftUpperCornerY = pin.getY();
 
-                if (leftCornerX == leftCornerXlookingFor && leftCornery==leftCornerylookingfor) {
+                if (leftUpperCornerX == leftCornerXlookingFor && leftUpperCornerY==leftCornerylookingfor) {
                     return pin;
                 }
             }
@@ -234,7 +242,6 @@ public class GameWindowController {
         kabel.getCircle2().setOnMousePressed(mousePressedEventHandler);
         kabel.getCircle2().setOnMouseDragged(mouseDraggedEventHandler);
         kabel.getCircle2().setOnMouseReleased(mouseDroppedEventHandler);
-
 
     }
 
