@@ -15,6 +15,7 @@ public class Main extends Application {
     public static final int KABELAMOUNT = 8;
     public static final int TILE_SIZE = 20;
     public static final int KABELRADIUS = 7;
+    public static String username = "";
 
 
 

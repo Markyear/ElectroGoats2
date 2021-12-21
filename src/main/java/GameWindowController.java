@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -37,13 +39,13 @@ public class GameWindowController {
         Main.window.show();
 
     }
-
     Media goatOK = new Media(getClass().getResource("Goat-Baby-Bah-B-www.fesliyanstudios.com.mp3").toExternalForm());
     MediaPlayer mediaPlayergoatOK = new MediaPlayer(goatOK);
     Media goatNotOK = new Media(getClass().getResource("Goat-Short-Cry-B-www.fesliyanstudios.com.mp3").toExternalForm());
     MediaPlayer mediaPlayergoatNotOK = new MediaPlayer(goatNotOK);
 
-    
+
+
     //zum Verschieben der Kabel
     //zum Speichern der Mausposition
     double orgSceneX, orgSceneY;
@@ -61,6 +63,11 @@ public class GameWindowController {
     }
 
     public void initialize(){
+
+        Label nametext = new Label(Main.username +" you need to rescue that goat, all fax no printer !");
+        nametext.setLayoutX(30);
+        nametext.setLayoutY(30);
+        anchorPane.getChildren().add(nametext);
 
     CircuitBoard newCircuitborard = new CircuitBoard(500, 100, 15, 24, 20, anchorPane);
     circuitArray = newCircuitborard.getPinsBoard();
@@ -89,7 +96,7 @@ public class GameWindowController {
         setAllMouseEvents(kabel8, gameResults);
 
 
-       gameResults.printCircleCoordinates();
+     //  gameResults.printCircleCoordinates();
 
     }
 
@@ -244,6 +251,5 @@ public class GameWindowController {
         kabel.getCircle2().setOnMouseReleased(mouseDroppedEventHandler);
 
     }
-
 
 }
