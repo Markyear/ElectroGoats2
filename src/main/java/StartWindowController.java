@@ -30,6 +30,7 @@ public class StartWindowController {
     @FXML
     private TextField nameTextfield;
 
+
     @FXML
     private RadioButton radioButtonLevel1;
 
@@ -48,6 +49,12 @@ public class StartWindowController {
     void startGame(ActionEvent event) throws IOException {
         Main.username = nameTextfield.getText();
 
+        if(Main.username.equals("")) {
+            nameTextfield.setPromptText("HEY, you forgot something!");
+            nameTextfield.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+        }
+        else {
+
         Parent root2 = FXMLLoader.load(getClass().getResource("GameWindow.fxml"));
 
         Scene scene = new Scene(root2);
@@ -55,6 +62,6 @@ public class StartWindowController {
         Main.window.setScene(scene);
         Main.window.show();
 
-    }
 
-}
+
+}}}

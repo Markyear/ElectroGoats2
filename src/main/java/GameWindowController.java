@@ -39,7 +39,7 @@ public class GameWindowController {
         Main.window.show();
 
     }
-    Media goatOK = new Media(getClass().getResource("Goat-Baby-Bah-B-www.fesliyanstudios.com.mp3").toExternalForm());
+    Media goatOK = new Media(getClass().getResource("snakeMusic.mp3").toExternalForm());
     MediaPlayer mediaPlayergoatOK = new MediaPlayer(goatOK);
     Media goatNotOK = new Media(getClass().getResource("Goat-Short-Cry-B-www.fesliyanstudios.com.mp3").toExternalForm());
     MediaPlayer mediaPlayergoatNotOK = new MediaPlayer(goatNotOK);

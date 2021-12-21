@@ -11,7 +11,7 @@
    <children>
       <Button fx:id="startGame" layoutX="682.0" layoutY="444.0" mnemonicParsing="false" onAction="#startGame" text="Let´s go!" />
       <Label fx:id="enterNameLabel" layoutX="601.0" layoutY="243.0" prefHeight="37.0" prefWidth="115.0" text="Enter your name, hon" />
-      <TextField fx:id="nameTextfield" layoutX="590.0" layoutY="280.0" promptText="type, type, type" />
+      <TextField fx:id="nameTextfield" layoutX="590.0" layoutY="280.0" prefHeight="26.0" prefWidth="185.0" promptText="type, type, type" styleClass="nameTextCSS" />
       <Label fx:id="levelLabel" layoutX="89.0" layoutY="253.0" text="What´s your level?" />
       <RadioButton fx:id="radioButtonLevel1" layoutX="81.0" layoutY="284.0" mnemonicParsing="false" text="Easy Peasy">
          <toggleGroup>
