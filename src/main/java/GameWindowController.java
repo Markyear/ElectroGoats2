@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -39,9 +38,9 @@ public class GameWindowController {
         Main.window.show();
 
     }
-    Media goatOK = new Media(getClass().getResource("snakeMusic.mp3").toExternalForm());
+    Media goatOK = new Media(getClass().getResource("Sound/Goat2.mp3").toExternalForm());
     MediaPlayer mediaPlayergoatOK = new MediaPlayer(goatOK);
-    Media goatNotOK = new Media(getClass().getResource("Goat-Short-Cry-B-www.fesliyanstudios.com.mp3").toExternalForm());
+    Media goatNotOK = new Media(getClass().getResource("Sound/Goat1.mp3").toExternalForm());
     MediaPlayer mediaPlayergoatNotOK = new MediaPlayer(goatNotOK);
 
 
