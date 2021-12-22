@@ -16,6 +16,8 @@ public class Main extends Application {
     public static final int TILE_SIZE = 20;
     public static final int KABELRADIUS = 7;
     public static String username = "";
+    public enum Level {easy, ok, hard};
+    public static Level level;
 
 
 

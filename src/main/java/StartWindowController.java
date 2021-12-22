@@ -45,6 +45,23 @@ public class StartWindowController {
     private Button startGame;
 
     @FXML
+    void easy(ActionEvent event) {
+        Main.level = Main.Level.easy;
+
+    }
+
+    @FXML
+    void hard(ActionEvent event) {
+        Main.level = Main.Level.hard;
+    }
+
+    @FXML
+    void ok(ActionEvent event) {
+        Main.level = Main.Level.ok;
+    }
+
+
+    @FXML
     // wenn der Button "start Game" gedrückt wird
     void startGame(ActionEvent event) throws IOException {
         Main.username = nameTextfield.getText();
@@ -53,11 +70,17 @@ public class StartWindowController {
             nameTextfield.setPromptText("HEY, you forgot something!");
             nameTextfield.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
         }
+
+        else if(Main.level ==null){
+           levelLabel.setText("Yo dog, you forgot something!");
+           levelLabel.setTextFill(Color.RED);
+        }
+
         else {
 
         Parent root2 = FXMLLoader.load(getClass().getResource("GameWindow.fxml"));
 
-        Scene scene = new Scene(root2);
+        Scene scene = new Scene(root2, 1500, 900);
 
         Main.window.setScene(scene);
         Main.window.show();

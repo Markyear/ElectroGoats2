@@ -1,6 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.scene.layout.*;
 
+import javax.imageio.ImageIO;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -11,7 +12,8 @@ public class EndWindowController {
 
     public void initialize() throws FileNotFoundException {
 
-        javafx.scene.image.Image image = new javafx.scene.image.Image(new FileInputStream("/Users/sandrabachinger-raithofer/IdeaProjects/ElectroGoats2/src/main/resources/BackgroundPictures/GoatsOnTree.png"));
+
+        javafx.scene.image.Image image = new javafx.scene.image.Image(new FileInputStream("src/main/resources/BackgroundPictures/GoatsOnTree.png"));
         //Setting the image view
         //ImageView imageView = new ImageView(image);
         BackgroundImage bImg = new BackgroundImage(image,

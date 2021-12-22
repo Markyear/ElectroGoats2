@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -17,6 +18,7 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URISyntaxException;
 
 
@@ -24,6 +26,15 @@ public class GameWindowController {
 
     @FXML
     private Button TryOutButton;
+
+    @FXML
+    private Label voltLabel;
+
+    @FXML
+    private Label code;
+
+    @FXML
+    private Label instruction;
 
     @FXML
     private AnchorPane anchorPane;
@@ -55,6 +66,7 @@ public class GameWindowController {
     Pins[][] circuitArray;
     Pins[][] microcontrollerArray;
     Pins[][] kabelstorageArray;
+    Pins[][] multimeterArray;
     Kabel [] gameResultKabelArray = new Kabel[Main.KABELAMOUNT];
     int kabelArrayCount = 0;
 
@@ -63,17 +75,23 @@ public class GameWindowController {
 
     public void initialize(){
 
+        System.out.print(Main.level);
+        code.setStyle("-fx-border-color: black ; -fx-border-width: 2px ;");
+        instruction.setStyle("-fx-border-color: black ; -fx-border-width: 2px ;");
+
         Label nametext = new Label(Main.username +" you need to rescue that goat, all fax no printer !");
         nametext.setLayoutX(30);
         nametext.setLayoutY(30);
         anchorPane.getChildren().add(nametext);
 
-    CircuitBoard newCircuitborard = new CircuitBoard(500, 100, 15, 24, 20, anchorPane);
+    CircuitBoard newCircuitborard = new CircuitBoard(800, 100, 15, 24, 20, anchorPane);
     circuitArray = newCircuitborard.getPinsBoard();
-    Microcontroller newMicrocontroller = new Microcontroller(20, 200, 4, 15, 180, anchorPane);
+    Microcontroller newMicrocontroller = new Microcontroller(400, 200, 4, 15, 180, anchorPane);
     microcontrollerArray = newMicrocontroller.getPinsBoard();
     Kabelstorage newKabelstorage = new Kabelstorage(20, 600, 8, 1, 5, anchorPane);
     kabelstorageArray = newKabelstorage.getPinsBoard();
+    MultimeterConnection newMultimeterConnection = new MultimeterConnection(1120, 150, 2, 2, 50, anchorPane);
+    multimeterArray = newMultimeterConnection.getPinsBoard();
     GameResults gameResults = new GameResults(gameResultKabelArray);
 
         Kabel kabel1 = new Kabel(35, 615, Color.BLUEVIOLET, anchorPane);
