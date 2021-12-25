@@ -9,9 +9,9 @@ public class CircuitBoard extends VariousCercuitBoards {
 
     private Pins[][] pinsBoard;
 
-    public CircuitBoard(int xAchse, int yAchse, int spalten, int zeilen, int abstand, AnchorPane anchorPane) {
+    public CircuitBoard(int xAchse, int yAchse, int spalten, int zeilen, int abstand,int abstand2, int abstand3, AnchorPane anchorPane) {
 
-        this.pinsBoard = createpinsboard(xAchse, yAchse, spalten, zeilen, abstand, anchorPane);
+        this.pinsBoard = createpinsboard(xAchse, yAchse, spalten, zeilen, abstand, abstand2, abstand3, anchorPane);
     }
 
 
@@ -23,14 +23,20 @@ public class CircuitBoard extends VariousCercuitBoards {
 
 
     // pins werden direkt in der Scene sichtbar gemacht und gleichzeitig in einem zweidimensionalen Arry gespeichert
-    public static Pins[][] createpinsboard(int xAchse, int yAchse, int spalten, int zeilen, int abstand, AnchorPane anchorPane){
+    public static Pins[][] createpinsboard(int xAchse, int yAchse, int spalten, int zeilen, int abstand, int abstand2, int abstand3, AnchorPane anchorPane){
         Pins[][] pinsArray = new Pins[zeilen][spalten];
         int pinxAchse = xAchse;
         int pinyAchse = yAchse;
 
         for(int e = 0; e < zeilen; e++, pinyAchse = pinyAchse+Main.TILE_SIZE){
-            if(e==4 || e == 12 || e == 20){
+            if(e==4){
                 pinyAchse = pinyAchse+abstand;
+            }
+            if (e == 12 ){
+                pinyAchse = pinyAchse+abstand2;
+            }
+            if (e == 20){
+                pinyAchse = pinyAchse+abstand3;
             }
             pinxAchse = xAchse;
         for (int i = 0; i < spalten; i++, pinxAchse = pinxAchse+Main.TILE_SIZE) {

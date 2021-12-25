@@ -31,8 +31,9 @@ public class MultimeterConnection extends VariousCercuitBoards {
         for(int e = 0; e < zeilen; e++, pinyAchse = pinyAchse+Main.TILE_SIZE){
             pinxAchse = xAchse;
             for (int i = 0; i < spalten; i++, pinxAchse = pinxAchse+Main.TILE_SIZE) {
-                if(i==1){
-                    pinxAchse = pinxAchse+abstand;}
+              //  if(i==1){
+                    pinxAchse = pinxAchse+abstand;
+              //  }
                 Pins pin = new Pins();
                 pin.setX(pinxAchse);
                 pin.setY(pinyAchse);

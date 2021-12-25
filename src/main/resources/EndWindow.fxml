@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane fx:id="anchorPaneEndWindow" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EndWindowController">
-
+<AnchorPane fx:id="anchorPaneEndWindow" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EndWindowController">
+   <children>
+      <Button fx:id="out" layoutX="75.0" layoutY="528.0" mnemonicParsing="false" onAction="#getOut" prefHeight="130.0" prefWidth="180.0" text="Get me the hell out of here!" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="again" layoutX="855.0" layoutY="519.0" mnemonicParsing="false" onAction="#againPlay" prefHeight="130.0" prefWidth="180.0" text="I can do better, I swear!" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>

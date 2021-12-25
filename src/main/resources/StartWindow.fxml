@@ -6,19 +6,50 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StartWindowController">
+<AnchorPane fx:id="anchorpane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StartWindowController">
    <children>
-      <Button fx:id="startGame" layoutX="682.0" layoutY="444.0" mnemonicParsing="false" onAction="#startGame" text="Let´s go!" />
-      <Label fx:id="enterNameLabel" layoutX="601.0" layoutY="243.0" prefHeight="37.0" prefWidth="115.0" text="Enter your name, hon" />
-      <TextField fx:id="nameTextfield" layoutX="590.0" layoutY="280.0" prefHeight="26.0" prefWidth="185.0" promptText="type, type, type" styleClass="nameTextCSS" />
-      <Label fx:id="levelLabel" layoutX="89.0" layoutY="253.0" text="What´s your level?" />
-      <RadioButton fx:id="radioButtonLevel1" layoutX="81.0" layoutY="284.0" mnemonicParsing="false" onAction="#easy" text="Easy Peasy">
+      <Button fx:id="startGame" layoutX="763.0" layoutY="421.0" mnemonicParsing="false" onAction="#startGame" prefHeight="49.0" prefWidth="105.0" text="Let´s go!">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Label fx:id="enterNameLabel" layoutX="567.0" layoutY="231.0" prefHeight="37.0" prefWidth="344.0" text="What´s your name, sweety?" textFill="WHITE">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <TextField fx:id="nameTextfield" layoutX="574.0" layoutY="283.0" prefHeight="49.0" prefWidth="294.0" promptText="type, type, type" styleClass="nameTextCSS">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label fx:id="levelLabel" layoutX="33.0" layoutY="234.0" text="What´s your level?" textFill="WHITE">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <RadioButton fx:id="radioButtonLevel1" layoutX="81.0" layoutY="284.0" mnemonicParsing="false" onAction="#easy" text="Easy Peasy" textFill="#fffefe">
          <toggleGroup>
             <ToggleGroup fx:id="level" />
          </toggleGroup>
+         <font>
+            <Font size="18.0" />
+         </font>
       </RadioButton>
-      <RadioButton fx:id="radioButtonLevel2" layoutX="81.0" layoutY="313.0" mnemonicParsing="false" onAction="#ok" text="Okay, I guess" toggleGroup="$level" />
-      <RadioButton fx:id="radioButtonLevel3" layoutX="81.0" layoutY="340.0" mnemonicParsing="false" onAction="#hard" text="WTF is this?" toggleGroup="$level" />
+      <RadioButton fx:id="radioButtonLevel2" layoutX="81.0" layoutY="329.0" mnemonicParsing="false" onAction="#ok" text="Okay, I guess" textFill="WHITE" toggleGroup="$level">
+         <font>
+            <Font size="18.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="radioButtonLevel3" layoutX="81.0" layoutY="373.0" mnemonicParsing="false" onAction="#hard" text="WTF is this?" textFill="WHITE" toggleGroup="$level">
+         <font>
+            <Font size="18.0" />
+         </font></RadioButton>
+      <Button fx:id="instruction" layoutX="583.0" layoutY="421.0" mnemonicParsing="false" onAction="#openInstructionsWindow" prefHeight="49.0" prefWidth="118.0" text="Instructions">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Label layoutX="267.0" layoutY="61.0" text="ELECTRO GOATS" textFill="WHITE">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -28,7 +28,8 @@ public class Pins extends Rectangle {
             setWidth(Main.TILE_SIZE);
             setHeight(Main.TILE_SIZE);
             this.setFill(Color.TRANSPARENT);
-            this.setStroke(Color.BLACK);
+            this.setStroke(Color.GREEN);
+            this.setFill(Color.BLACK);
             this.amIempty = true;
         }
 
