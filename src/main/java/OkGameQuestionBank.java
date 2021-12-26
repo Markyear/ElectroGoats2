@@ -7,7 +7,7 @@ public class OkGameQuestionBank {
     public OkGameQuestionBank(){
 
         //Question 1
-        String question1Instruction = "Setze 1x ganz links oben am CircuitB und einmal links oben entweder 4,3 oder 2t Reihe";
+        String question1Instruction = "Setze 1x ganz links oben am CircuitB und einmal links oben entweder 4,3 oder 2t Reihe + setze einen Jumper um Buslinie 2 und 3 zu verbinden";
         String question1Code= "#include \"mbed.h\"\n" +
                 "\n" +
                 "DigitalOut myled(PA_5);\n" +
@@ -43,7 +43,11 @@ public class OkGameQuestionBank {
         ArrayList<ResultPins> question1resultpins = new ArrayList<>();
         question1resultpins.add(new ResultPins(q1k1p1, q1k1p2, q1k2p1,q1k2p2));
 
-        Questions questions1 = new Questions(question1Instruction, question1Code, question1Path, question1Volt, question1resultpins);
+        KoordinatenForJumper jumper1 = new KoordinatenForJumper(1, 7, 26, 7, 1, 8, 26, 8);
+        ArrayList<KoordinatenForJumper> jumperArrayList = new ArrayList<>();
+        jumperArrayList.add(jumper1);
+
+        Questions questions1 = new Questions(question1Instruction, question1Code, question1Path, question1Volt, question1resultpins,jumperArrayList);
 
         okQuestions = new Questions[]{
                 questions1

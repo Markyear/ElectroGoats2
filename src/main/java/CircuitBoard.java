@@ -55,7 +55,7 @@ public class CircuitBoard extends VariousCercuitBoards {
                             Color color = (Color) pin.getFill();
                             if (color == Color.RED){
                                 pin.setAmIempty(true);
-                                pin.setFill(Color.TRANSPARENT);
+                                pin.setFill(Color.BLACK);
 
                             }
                             else {

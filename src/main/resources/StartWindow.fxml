@@ -14,7 +14,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Label fx:id="enterNameLabel" layoutX="567.0" layoutY="231.0" prefHeight="37.0" prefWidth="344.0" text="What´s your name, sweety?" textFill="WHITE">
+      <Label fx:id="enterNameLabel" layoutX="567.0" layoutY="231.0" prefHeight="37.0" prefWidth="425.0" text="What´s your name, sweety?" textFill="WHITE" wrapText="true">
          <font>
             <Font size="26.0" />
          </font></Label>

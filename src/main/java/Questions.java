@@ -7,13 +7,16 @@ public class Questions {
     private String pathToResultPicture;
     private double volt;
     private ArrayList<ResultPins> result = new ArrayList<>();
+    private ArrayList<KoordinatenForJumper> jumpersResult = new ArrayList<>();
 
-    public Questions(String instructions, String code, String pathToResultPicture, double volt,  ArrayList<ResultPins> result) {
+
+    public Questions(String instructions, String code, String pathToResultPicture, double volt,  ArrayList<ResultPins> result, ArrayList<KoordinatenForJumper> jumpersResult) {
         this.instructions = instructions;
         this.code = code;
         this.pathToResultPicture = pathToResultPicture;
         this.volt = volt;
         this.result = result;
+        this.jumpersResult = jumpersResult;
     }
 
     public double getVolt() {
@@ -36,5 +39,7 @@ public class Questions {
         return result;
     }
 
-
+    public ArrayList<KoordinatenForJumper> getJumpersResult() {
+        return jumpersResult;
+    }
 }

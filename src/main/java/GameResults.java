@@ -37,7 +37,20 @@ public class GameResults {
         }
     }
 
-    public boolean checkResult(ArrayList<ResultPins> resultForThisGame) {
+    public boolean checkResult(ArrayList<ResultPins> resultForThisGame, ArrayList<KoordinatenForJumper> koordinatenForJumpers) {
+
+        //cheching if the jumpers are set right-> in the position between the possible values
+        Iterator<KoordinatenForJumper> korJumperIterator = koordinatenForJumpers.iterator();
+        while (korJumperIterator.hasNext()) {
+            KoordinatenForJumper korJumper = korJumperIterator.next();
+            for (int x = korJumper.getX1_1()-1; x< korJumper.getX1_2(); x++){
+                if (!this.circuitArray[korJumper.getY1_1()][x].isAmIempty() && !this.circuitArray[korJumper.getY1_2()][x].isAmIempty()){
+                 korJumperIterator.remove();
+            }
+        }}
+        if (!koordinatenForJumpers.isEmpty()){
+            return false;
+        }
 
         //zum testen werden Kopien erstellt, damit bei erneuten testen wieder alles neu geprüft werden kann
        //https://www.delftstack.com/de/howto/java/copy-arraylist-java/
@@ -113,6 +126,5 @@ public class GameResults {
         else{
             return false;}
         }
-
 
 }

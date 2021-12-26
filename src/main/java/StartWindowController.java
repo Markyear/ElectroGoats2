@@ -37,8 +37,10 @@ public class StartWindowController {
     @FXML
     private TextField nameTextfield;
 
+
     @FXML
     private Button instruction;
+
 
     @FXML
     void openInstructionsWindow(ActionEvent event) throws IOException {
@@ -48,6 +50,7 @@ public class StartWindowController {
 
         Scene scene2 = new Scene(root2, 800, 800);
         secondStage.setScene(scene2);
+        secondStage.centerOnScreen();
         secondStage.show();
     }
 
@@ -66,10 +69,7 @@ public class StartWindowController {
     private Button startGame;
 
     @FXML
-    void easy(ActionEvent event) {
-        Main.level = Main.Level.easy;
-
-    }
+    void easy(ActionEvent event) { Main.level = Main.Level.easy; }
 
     @FXML
     void hard(ActionEvent event) {
@@ -85,14 +85,16 @@ public class StartWindowController {
     @FXML
         // wenn der Button "start Game" gedrückt wird
     void startGame(ActionEvent event) throws IOException {
-        Main.username = nameTextfield.getText();
 
+           //falls Username nicht eingegeben wurde
         if (Main.username.equals("")) {
-            nameTextfield.setPromptText("HEY, we need some fax, no printer!");
+            nameTextfield.setPromptText("HEY, we need your name, all fax, no printer!");
             nameTextfield.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+            //falls Level nicht ausgewählt wurde
         } else if (Main.level == null) {
             levelLabel.setText("Yo dog, you forgot something!");
             levelLabel.setTextFill(Color.RED);
+            //neue Scene wird geladen
         } else {
 
             Parent root2 = FXMLLoader.load(getClass().getResource("GameWindow.fxml"));
@@ -100,17 +102,27 @@ public class StartWindowController {
             Scene scene = new Scene(root2, 1500, 900);
 
             Main.window.setScene(scene);
+            Main.window.centerOnScreen();
             Main.window.show();
-
 
         }
 
     }
 
     public void initialize() throws FileNotFoundException {
+    //falls bereits die zweite Runde gespielt wird, wird vorgeschlagen, ob Name und Level beibehalten werden soll
+        if (!Main.username.equals("")) {
+            enterNameLabel.setText("Wanne stay with the name " + Main.username + " ?");
+            nameTextfield.setPromptText(Main.username);}
+
+        if (Main.level!=null) {
+            levelLabel.setText("Your set level is " + Main.level + " do you wanne change it?");}
+
+        // wenn im Namensfeld etwas getippt wird, wird das getippte in Main.username gespeichert
+        nameTextfield.textProperty().addListener(observable -> Main.username = nameTextfield.getText());
+
         javafx.scene.image.Image background = new javafx.scene.image.Image(new FileInputStream("src/main/resources/BackgroundPictures/background_start_window.jpg"));
-        //Setting the image view
-        //ImageView imageView = new ImageView(image);
+
         BackgroundImage bImg = new BackgroundImage(background,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,

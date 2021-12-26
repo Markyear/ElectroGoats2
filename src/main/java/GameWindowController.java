@@ -59,7 +59,7 @@ public class GameWindowController {
             }
 
         }
-        if(gameResults.checkResult(resultForThisGame) && isset){
+        if(gameResults.checkResult(resultForThisGame,jumperArrayList) && isset){
             voltLabel.setText(String.valueOf(Main.thisGameQuestion.getVolt()));
         }
         else {voltLabel.setText("ERROR");}
@@ -69,12 +69,13 @@ public class GameWindowController {
     @FXML
     void tryOut(ActionEvent event) throws IOException {
         //gameResults.checkResult(resultForThisGame);
-        Main.gameResult = gameResults.checkResult(resultForThisGame);
+        Main.gameResult = gameResults.checkResult(resultForThisGame, jumperArrayList);
         Parent root3 = FXMLLoader.load(getClass().getResource("ResultWindow.fxml"));
 
         Scene scene = new Scene(root3);
 
         Main.window.setScene(scene);
+        Main.window.centerOnScreen();
         Main.window.show();
 
     }
@@ -89,6 +90,7 @@ public class GameWindowController {
 
     Questions questionForThisGame;
     ArrayList<ResultPins> resultForThisGame = new ArrayList<>();
+    ArrayList<KoordinatenForJumper> jumperArrayList = new ArrayList<>();
     GameResults gameResults;
 
 
@@ -137,7 +139,7 @@ public class GameWindowController {
         code.setText(questionForThisGame.getCode());
 
         resultForThisGame = questionForThisGame.getResult();
-
+        jumperArrayList = questionForThisGame.getJumpersResult();
 
 
        // Mikrokontroller image
@@ -171,7 +173,7 @@ public class GameWindowController {
         javafx.scene.image.Image image4 = new javafx.scene.image.Image(new FileInputStream("src/main/resources/BackgroundPictures/babygoat.png"));
         ImageView babygoat = new ImageView();
         babygoat.setImage(image4);
-        babygoat.setX(430);
+        babygoat.setX(550);
         babygoat.setY(20);
         babygoat.setFitHeight(200);
         babygoat.setFitWidth(200);
@@ -202,11 +204,17 @@ public class GameWindowController {
 
 
 
+        Label level = new Label("You chose level: " + Main.level);
+        level.setLayoutX(30);
+        level.setLayoutY(30);
+        level.setFont(new Font(35));
+
+
         Label nametext = new Label(Main.username +", save Garrett the Goat!!");
         nametext.setLayoutX(30);
-        nametext.setLayoutY(30);
-        nametext.setFont(new Font(35));
-        anchorPane.getChildren().addAll(nametext, voltLabel);
+        nametext.setLayoutY(90);
+        nametext.setFont(new Font(45));
+        anchorPane.getChildren().addAll(nametext, voltLabel, level);
 
     CircuitBoard newCircuitborard = new CircuitBoard(795, 128, 27, 24, 85, 91, 86, anchorPane);
     circuitArray = newCircuitborard.getPinsBoard();

@@ -41,6 +41,7 @@ public class ResultWindowController {
         Scene scene = new Scene(root4, 1100, 700);
 
         Main.window.setScene(scene);
+        Main.window.centerOnScreen();
         Main.window.show();
     }
 
@@ -72,6 +73,7 @@ public class ResultWindowController {
 
                     Scene scene2 = new Scene(root2, 700, 800);
                     secondStage.setScene(scene2);
+                    secondStage.centerOnScreen();
                     secondStage.show();
 
                 }

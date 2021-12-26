@@ -12,7 +12,6 @@ import java.net.URL;
 public class Main extends Application {
 
     public static Stage window = new Stage();
-    public static final int KABELAMOUNT = 8;
     public static final int TILE_SIZE = 16;
     public static final int KABELRADIUS = 7;
     public static String username = "";
@@ -39,6 +38,7 @@ public class Main extends Application {
             window.setScene(scene);
             //Größe des Fensters lässt sich nicht mehr verändern
             window.setResizable(false);
+            window.centerOnScreen();
             window.show();
         }
 }
