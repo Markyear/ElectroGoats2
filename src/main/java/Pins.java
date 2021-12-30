@@ -4,16 +4,16 @@ import javafx.scene.shape.Rectangle;
 
 public class Pins extends Rectangle {
 
-        private boolean amIempty;
+        private boolean isEmpty;
 
         private Circle circle;
 
-    public void setAmIempty(boolean amIempty) {
-        this.amIempty = amIempty;
+    public void setEmpty(boolean empty) {
+        this.isEmpty = empty;
     }
 
-    public boolean isAmIempty() {
-        return amIempty;
+    public boolean isEmpty() {
+        return isEmpty;
     }
 
     public boolean hasPiece() {
@@ -30,7 +30,7 @@ public class Pins extends Rectangle {
             this.setFill(Color.TRANSPARENT);
             this.setStroke(Color.GREEN);
             this.setFill(Color.BLACK);
-            this.amIempty = true;
+            this.isEmpty = true;
         }
 
 

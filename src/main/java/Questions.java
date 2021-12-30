@@ -5,22 +5,22 @@ public class Questions {
     private String instructions;
     private String code;
     private String pathToResultPicture;
-    private double volt;
+    private String ergebnis;
     private ArrayList<ResultPins> result = new ArrayList<>();
     private ArrayList<KoordinatenForJumper> jumpersResult = new ArrayList<>();
 
 
-    public Questions(String instructions, String code, String pathToResultPicture, double volt,  ArrayList<ResultPins> result, ArrayList<KoordinatenForJumper> jumpersResult) {
+    public Questions(String instructions, String code, String pathToResultPicture, String ergebnis,  ArrayList<ResultPins> result, ArrayList<KoordinatenForJumper> jumpersResult) {
         this.instructions = instructions;
         this.code = code;
         this.pathToResultPicture = pathToResultPicture;
-        this.volt = volt;
+        this.ergebnis = ergebnis;
         this.result = result;
         this.jumpersResult = jumpersResult;
     }
 
-    public double getVolt() {
-        return volt;
+    public String getVolt() {
+        return ergebnis;
     }
 
     public String getInstructions() {

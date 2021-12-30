@@ -25,8 +25,9 @@ public class OkGameQuestionBank {
 
         String question1Path = "src/main/resources/AnswerPictures/easy1.png";
 
-        double question1Volt = 3.8;
+        String question1Volt = "3.8 Volt";
 
+        //Kabel1 von Mikrokontroller zum Steckboard
         Pins q1k1p1 = new Pins();
         q1k1p1.setX(795+ Main.TILE_SIZE/2);
         q1k1p1.setY(128+Main.TILE_SIZE/2);

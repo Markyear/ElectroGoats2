@@ -116,7 +116,7 @@ public class StartWindowController {
             nameTextfield.setPromptText(Main.username);}
 
         if (Main.level!=null) {
-            levelLabel.setText("Your set level is " + Main.level + " do you wanne change it?");}
+            levelLabel.setText("Your set level is: " + Main.level + ". Do you wanne change it?");}
 
         // wenn im Namensfeld etwas getippt wird, wird das getippte in Main.username gespeichert
         nameTextfield.textProperty().addListener(observable -> Main.username = nameTextfield.getText());

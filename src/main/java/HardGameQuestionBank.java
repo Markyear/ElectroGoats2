@@ -24,7 +24,7 @@ public class HardGameQuestionBank {
 
         String question1Path = "src/main/resources/AnswerPictures/easy1.png";
 
-        double question1Volt = 3.5;
+        String question1Volt = "3.5 Volt";
 
 
         Pins q1k1p1 = new Pins();

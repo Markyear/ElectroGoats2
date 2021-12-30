@@ -6,8 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -22,9 +20,6 @@ import javafx.scene.text.Font;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.Socket;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 
@@ -52,7 +47,7 @@ public class GameWindowController {
         boolean isset = true;
         for(Pins[] pinA : multimeterArray){
             for(Pins pin : pinA){
-                if (pin.isAmIempty() == true){
+                if (pin.isEmpty() == true){
                     isset = false;
                     break;
                 };
@@ -115,7 +110,7 @@ public class GameWindowController {
         if (Main.level == Main.Level.easy){
             questionForThisGame = easyQuestion.getEasyQuestions()[Main.easyWhichQuestion];
             Main.thisGameQuestion = questionForThisGame;
-         //   Main.easyWhichQuestion++;
+            Main.easyWhichQuestion++;
             if(Main.easyWhichQuestion == 2){
                 Main.easyWhichQuestion = 0;
             }}
@@ -222,7 +217,7 @@ public class GameWindowController {
     microcontrollerArray = newMicrocontroller.getPinsBoard();
     Kabelstorage newKabelstorage = new Kabelstorage(370, 750, 10, 2, 5, anchorPane);
     kabelstorageArray = newKabelstorage.getPinsBoard();
-    MultimeterConnection newMultimeterConnection = new MultimeterConnection(1225, 175, 2, 2, 20, anchorPane);
+    MultimeterConnection newMultimeterConnection = new MultimeterConnection(1285, 175, 1, 4, 60, anchorPane);
     multimeterArray = newMultimeterConnection.getPinsBoard();
     gameResults = new GameResults(gameResultKabelArray,circuitArray,microcontrollerArray);
 
@@ -275,12 +270,27 @@ public class GameWindowController {
      //  gameResults.printCircleCoordinates();
 
         //test visually the calculateed results of our game
-      /*  Circle circle11 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
-        Circle circle12 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_2().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_2().getY(),Main.KABELRADIUS, Color.BEIGE);
-        Circle circle13 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel2_1().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel2_1().getY(),Main.KABELRADIUS, Color.BLUE);
-        Circle circle14 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel2_2().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel2_2().getY(),Main.KABELRADIUS, Color.VIOLET);
+    /*   Circle circle11 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
+        Circle circle12 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_2().getY(),Main.KABELRADIUS, Color.RED);
+        Circle circle13 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_1().getY(),Main.KABELRADIUS, Color.RED);
+        Circle circle14 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_2().getY(),Main.KABELRADIUS, Color.RED);
 
-        Circle circle21 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(1).getPinForKabel1_1().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
+        Circle circle21 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(1).getPinForKabel1_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(1).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.BLUE);
+        Circle circle22 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(1).getPinForKabel1_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(1).getPinForKabel1_2().getY(),Main.KABELRADIUS, Color.BLUE);
+        Circle circle23 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(1).getPinForKabel2_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(1).getPinForKabel2_1().getY(),Main.KABELRADIUS, Color.BLUE);
+        Circle circle24 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(1).getPinForKabel2_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(1).getPinForKabel2_2().getY(),Main.KABELRADIUS, Color.BLUE);
+
+        Circle circle31 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(2).getPinForKabel1_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(2).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.BEIGE);
+        Circle circle32 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(2).getPinForKabel1_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(2).getPinForKabel1_2().getY(),Main.KABELRADIUS, Color.BEIGE);
+        Circle circle33 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(2).getPinForKabel2_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(2).getPinForKabel2_1().getY(),Main.KABELRADIUS, Color.BEIGE);
+        Circle circle34 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(2).getPinForKabel2_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(2).getPinForKabel2_2().getY(),Main.KABELRADIUS, Color.BEIGE);
+
+        Circle circle41 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(3).getPinForKabel1_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(3).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.VIOLET);
+        Circle circle42 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(3).getPinForKabel1_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(3).getPinForKabel1_2().getY(),Main.KABELRADIUS, Color.VIOLET);
+        Circle circle43 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(3).getPinForKabel2_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(3).getPinForKabel2_1().getY(),Main.KABELRADIUS, Color.VIOLET);
+        Circle circle44 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(3).getPinForKabel2_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(3).getPinForKabel2_2().getY(),Main.KABELRADIUS, Color.VIOLET);
+
+     /*  Circle circle21 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(1).getPinForKabel1_1().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle22 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(1).getPinForKabel1_2().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle23 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(1).getPinForKabel2_1().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle24 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(1).getPinForKabel2_2().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
@@ -293,8 +303,10 @@ public class GameWindowController {
         Circle circle41 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle42 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_2().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle43 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel2_1().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
-        Circle circle44 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel2_2().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
-        anchorPane.getChildren().addAll(circle11,circle12,circle13, circle14);*/
+        Circle circle44 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel2_2().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);*/
+    //  anchorPane.getChildren().addAll(circle11,circle12,circle13, circle14,circle21,circle22,circle23, circle24,circle31,circle32,circle33, circle34, circle41,circle42,circle43, circle44);
+        //anchorPane.getChildren().addAll(circle11,circle12,circle13, circle14);
+      //  anchorPane.getChildren().addAll(circle11,circle12,circle13, circle14,circle21,circle22,circle23, circle24);
 
     }
 
@@ -312,7 +324,7 @@ public class GameWindowController {
 
         //damit anderes Kabel oder Jumper auf den nun frei gewordenen Pin gesetzt werden kann
         Pins pin = whatPintoSetIsEmptyValue(c.getCenterX(),c.getCenterY());
-        if (pin != null){pin.setAmIempty(true);}
+        if (pin != null){pin.setEmpty(true);}
 
         c.toFront();
         mediaPlayergoatOK.stop();
@@ -345,7 +357,7 @@ public class GameWindowController {
 
             // Falls Kabel wird an Ursprungsort zurückhüpft (da ausgesuchter Ort nicht geht) wird Pin auf "besetzt" geegeben
             targetPin = whatPintoSetIsEmptyValue(superorgScenX, superorgSceneY);
-            if (targetPin != null){targetPin.setAmIempty(false);}
+            if (targetPin != null){targetPin.setEmpty(false);}
             mediaPlayergoatNotOK.play();
 
         }
@@ -368,14 +380,15 @@ public class GameWindowController {
 
         for (int i = 0; i < circuitArray.length; i++) {
             for (int y = 0; y < circuitArray[i].length; y++) {
+                if(circuitArray[i][y]!=null){
                 pin = circuitArray[i][y];
                 leftCornerX = pin.getX();
                 leftCornery = pin.getY();
 
-                if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE) && pin.isAmIempty()) {
-                    pin.setAmIempty(false);
+                if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE) && pin.isEmpty()) {
+                    pin.setEmpty(false);
                     return pin;
-                }
+                }}
             }
         }
         for (int i = 0; i < microcontrollerArray.length; i++) {
@@ -384,8 +397,8 @@ public class GameWindowController {
                 leftCornerX = pin.getX();
                 leftCornery = pin.getY();
 
-                if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE) && pin.isAmIempty()) {
-                    pin.setAmIempty(false);
+                if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE) && pin.isEmpty()) {
+                    pin.setEmpty(false);
                     return pin;
                 }
             }
@@ -396,8 +409,8 @@ public class GameWindowController {
                 leftCornerX = pin.getX();
                 leftCornery = pin.getY();
 
-                if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE) && pin.isAmIempty()) {
-                    pin.setAmIempty(false);
+                if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE) && pin.isEmpty()) {
+                    pin.setEmpty(false);
                     return pin;
                 }
             }
@@ -411,7 +424,7 @@ public class GameWindowController {
                 leftCornery = pin.getY();
 
                 if (leftCornerX < sceneX && sceneX < (leftCornerX + Main.TILE_SIZE) && leftCornery < sceneY && sceneY < (leftCornery + Main.TILE_SIZE)) {
-                    pin.setAmIempty(false);
+                    pin.setEmpty(false);
                     return pin;
                 }
             }
@@ -430,13 +443,14 @@ public class GameWindowController {
         Pins pin;
         for (int i = 0; i < circuitArray.length; i++) {
             for (int y = 0; y < circuitArray[i].length; y++) {
+                if(circuitArray[i][y]!=null){
                 pin = circuitArray[i][y];
                 leftUpperCornerX = pin.getX();
                 leftUpperCornerY = pin.getY();
 
                 if (leftUpperCornerX == leftCornerXlookingFor && leftUpperCornerY==leftCornerylookingfor) {
                     return pin;
-                }
+                }}
             }
         }
         for (int i = 0; i < microcontrollerArray.length; i++) {

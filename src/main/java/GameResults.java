@@ -39,16 +39,18 @@ public class GameResults {
 
     public boolean checkResult(ArrayList<ResultPins> resultForThisGame, ArrayList<KoordinatenForJumper> koordinatenForJumpers) {
 
+        ArrayList<KoordinatenForJumper> koordinatenForJumpersCopy = new ArrayList<>(koordinatenForJumpers);
         //cheching if the jumpers are set right-> in the position between the possible values
-        Iterator<KoordinatenForJumper> korJumperIterator = koordinatenForJumpers.iterator();
+        Iterator<KoordinatenForJumper> korJumperIterator = koordinatenForJumpersCopy.iterator();
         while (korJumperIterator.hasNext()) {
             KoordinatenForJumper korJumper = korJumperIterator.next();
             for (int x = korJumper.getX1_1()-1; x< korJumper.getX1_2(); x++){
-                if (!this.circuitArray[korJumper.getY1_1()][x].isAmIempty() && !this.circuitArray[korJumper.getY1_2()][x].isAmIempty()){
+                if ((!this.circuitArray[(korJumper.getY1_1())-1][x].isEmpty()) && (!this.circuitArray[(korJumper.getY2_1())-1][x].isEmpty())){
                  korJumperIterator.remove();
+                 break;
             }
         }}
-        if (!koordinatenForJumpers.isEmpty()){
+        if (!koordinatenForJumpersCopy.isEmpty()){
             return false;
         }
 
@@ -69,10 +71,9 @@ public class GameResults {
             Kabel kabel = cabelterator.next();
             if (kabel.getCircle1().getCenterY() == 763
                     || kabel.getCircle1().getCenterY() == 763+5+Main.TILE_SIZE
-           ||kabel.getCircle1().getCenterX()==(1245+(Main.TILE_SIZE/2))
+           ||kabel.getCircle1().getCenterX()==(1285+(Main.TILE_SIZE/2)))
                     //das zweite Rectangle wird auf 1281 gesetzt-> ka warum -> nur durch debugger draufgekommen
-            || kabel.getCircle1().getCenterX() == 1281+Main.TILE_SIZE/2
-            ){
+            {
                 cabelterator.remove();}
         }
 
@@ -105,14 +106,14 @@ public class GameResults {
                         cabelterator2.remove();
                         resultterator.remove();
                     } else {
-                        return false;
+                     //   return false;
                     }
                 } else if (kabel.getCircle2().getCenterY() >= yOneside1 && yOtherside1 >= kabel.getCircle2().getCenterY() && kabel.getCircle2().getCenterX() >= xOneside1 && xOtherside1 >= kabel.getCircle2().getCenterX()) {
                     if (kabel.getCircle1().getCenterY() >= yOneside2 && yOtherside2 >= kabel.getCircle1().getCenterY() && kabel.getCircle1().getCenterX() >= xOneside1 && xOtherside2 >= kabel.getCircle1().getCenterX()) {
                         cabelterator2.remove();
                         resultterator.remove();
                     } else {
-                        return false;
+                      //  return false;
                     }
                 }
             }

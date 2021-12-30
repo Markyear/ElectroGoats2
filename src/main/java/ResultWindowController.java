@@ -47,6 +47,8 @@ public class ResultWindowController {
 
     public void initialize() throws FileNotFoundException {
       Image image = null;
+      thanks.setLayoutX(425);
+      thanks.setLayoutY(350);
 
         if (Main.gameResult==false){
              image = new Image(new File("src/main/resources/GoatVideos/goat-fall.gif").toURI().toString());
@@ -63,7 +65,7 @@ public class ResultWindowController {
 
                 @Override
                 public void handle(Event event) {Stage secondStage = new Stage();
-
+                thanks.setText("Next step");
                     Parent root2 = null;
                     try {
                         root2 = FXMLLoader.load(getClass().getResource("RightAnswerWindow.fxml"));

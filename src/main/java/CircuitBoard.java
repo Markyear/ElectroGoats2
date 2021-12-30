@@ -24,7 +24,7 @@ public class CircuitBoard extends VariousCercuitBoards {
 
     // pins werden direkt in der Scene sichtbar gemacht und gleichzeitig in einem zweidimensionalen Arry gespeichert
     public static Pins[][] createpinsboard(int xAchse, int yAchse, int spalten, int zeilen, int abstand, int abstand2, int abstand3, AnchorPane anchorPane){
-        Pins[][] pinsArray = new Pins[zeilen][spalten];
+        Pins[][] pinsArray = new Pins[zeilen][spalten+1];
         int pinxAchse = xAchse;
         int pinyAchse = yAchse;
 
@@ -43,6 +43,19 @@ public class CircuitBoard extends VariousCercuitBoards {
             Pins pin = new Pins();
             pin.setX(pinxAchse);
             pin.setY(pinyAchse);
+
+            if( (e ==0 || e== 1) && i == (spalten-1)){
+                Pins pinfürMessen = new Pins();
+                pinfürMessen.setX(pinxAchse+30);
+                pinfürMessen.setY(pinyAchse);
+                pinsArray[e][spalten] = pinfürMessen;
+                anchorPane.getChildren().add(pinfürMessen);
+
+                if(e==0){
+                    pinfürMessen.setFill(Color.YELLOW);
+                }
+                else{pinfürMessen.setFill(Color.BLUE);}
+            }
             // bei Doppelklick auf Pin wird ein Teil des "jumpers" gesetzt -> der Pin wird rot
             // beim erneuten Doppelklick wird der Pin wieder frei
             pin.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -54,13 +67,13 @@ public class CircuitBoard extends VariousCercuitBoards {
                             Pins pin = (Pins) (t.getSource());
                             Color color = (Color) pin.getFill();
                             if (color == Color.RED){
-                                pin.setAmIempty(true);
+                                pin.setEmpty(true);
                                 pin.setFill(Color.BLACK);
 
                             }
                             else {
                             pin.setFill(Color.RED);
-                            pin.setAmIempty(false);
+                            pin.setEmpty(false);
                 }}
             }
                 }});
