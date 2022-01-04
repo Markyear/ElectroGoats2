@@ -45,16 +45,16 @@ public class CircuitBoard extends VariousCercuitBoards {
             pin.setY(pinyAchse);
 
             if( (e ==0 || e== 1) && i == (spalten-1)){
-                Pins pinfürMessen = new Pins();
-                pinfürMessen.setX(pinxAchse+30);
-                pinfürMessen.setY(pinyAchse);
-                pinsArray[e][spalten] = pinfürMessen;
-                anchorPane.getChildren().add(pinfürMessen);
+                Pins pinfurMessen = new Pins();
+                pinfurMessen.setX(pinxAchse+30);
+                pinfurMessen.setY(pinyAchse);
+                pinsArray[e][spalten] = pinfurMessen;
+                anchorPane.getChildren().add(pinfurMessen);
 
                 if(e==0){
-                    pinfürMessen.setFill(Color.YELLOW);
+                    pinfurMessen.setFill(Color.YELLOW);
                 }
-                else{pinfürMessen.setFill(Color.BLUE);}
+                else{pinfurMessen.setFill(Color.BLUE);}
             }
             // bei Doppelklick auf Pin wird ein Teil des "jumpers" gesetzt -> der Pin wird rot
             // beim erneuten Doppelklick wird der Pin wieder frei

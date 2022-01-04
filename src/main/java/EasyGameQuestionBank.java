@@ -118,7 +118,7 @@ public class EasyGameQuestionBank {
         q2k3p4.setY(128+(Main.TILE_SIZE/2));
 
         //Kabel 4 von Circuitboard zum Multimeter
-       Pins q2k4p1 = new Pins();
+        Pins q2k4p1 = new Pins();
         q2k4p1.setX(795+ Main.TILE_SIZE/2);
         q2k4p1.setY(128+(Main.TILE_SIZE/2)+85+91+86+(23*Main.TILE_SIZE));
         Pins q2k4p2 = new Pins();
