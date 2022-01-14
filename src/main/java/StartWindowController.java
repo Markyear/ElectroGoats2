@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -37,6 +38,8 @@ public class StartWindowController {
     @FXML
     private TextField nameTextfield;
 
+    @FXML
+    private Label headline;
 
     @FXML
     private Button instruction;
@@ -45,6 +48,7 @@ public class StartWindowController {
     @FXML
     void openInstructionsWindow(ActionEvent event) throws IOException {
         Stage secondStage = new Stage();
+        Font font = Font.loadFont(getClass().getResourceAsStream("ElectricFont2.ttf"), 40);
 
         Parent root2 = FXMLLoader.load(getClass().getResource("InstructionWindow.fxml"));
 
@@ -110,6 +114,12 @@ public class StartWindowController {
     }
 
     public void initialize() throws FileNotFoundException {
+        Font font = Font.loadFont(getClass().getResourceAsStream("ElectricFont2.ttf"), 90);
+
+        headline.setFont(font);
+
+       // headline.setTextFill(Color.WHITESMOKE);
+
     //falls bereits die zweite Runde gespielt wird, wird vorgeschlagen, ob Name und Level beibehalten werden soll
         if (!Main.username.equals("")) {
             enterNameLabel.setText("Wanne stay with the name " + Main.username + " ?");

@@ -2,12 +2,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.net.URL;
 
 public class Main extends Application {
 
@@ -17,12 +13,12 @@ public class Main extends Application {
     public static String username = "";
     public enum Level {easy, ok, hard};
     public static Level level;
-    public static int easyWhichQuestion = 1;
+    public static int easyWhichQuestion = 0;
     public static int okWhichQuestion = 0;
     public static int hardWhichQuestion = 0;
     public static Questions thisGameQuestion;
     public static boolean gameResult = true;
-
+    //public static Font font = Font.loadFont(Main.class.getResourceAsStream("ElectricFont.ttf"), 80);
 
 
 
@@ -31,6 +27,9 @@ public class Main extends Application {
         }
 
         public void start(Stage primaryStage) throws Exception {
+
+         //   Font.loadFont(getClass().getResource("ElectricFont.ttf").toExternalForm(), 45);
+
             Parent root = FXMLLoader.load(getClass().getResource("StartWindow.fxml"));
             Scene scene = new Scene(root, 1000, 500);
 

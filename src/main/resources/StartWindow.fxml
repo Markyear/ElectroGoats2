@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="anchorpane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StartWindowController">
    <children>
-      <Button fx:id="startGame" layoutX="763.0" layoutY="421.0" mnemonicParsing="false" onAction="#startGame" prefHeight="49.0" prefWidth="105.0" text="Let´s go!">
+      <Button fx:id="startGame" layoutX="736.0" layoutY="421.0" mnemonicParsing="false" onAction="#startGame" prefHeight="53.0" prefWidth="132.0" styleClass="style" stylesheets="@syle.css" text="Let´s go!">
          <font>
             <Font size="18.0" />
          </font></Button>
@@ -42,11 +42,11 @@
          <font>
             <Font size="18.0" />
          </font></RadioButton>
-      <Button fx:id="instruction" layoutX="583.0" layoutY="421.0" mnemonicParsing="false" onAction="#openInstructionsWindow" prefHeight="49.0" prefWidth="118.0" text="Instructions">
+      <Button fx:id="instruction" layoutX="548.0" layoutY="421.0" mnemonicParsing="false" onAction="#openInstructionsWindow" prefHeight="53.0" prefWidth="153.0" styleClass="style" stylesheets="@syle.css" text="Instructions">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Label layoutX="267.0" layoutY="61.0" text="ELECTRO GOATS" textFill="WHITE">
+      <Label fx:id="headline" layoutX="181.0" layoutY="61.0" text="ELECTRO GOATS" textFill="WHITE">
          <font>
             <Font size="64.0" />
          </font>

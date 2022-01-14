@@ -199,16 +199,21 @@ public class GameWindowController {
 
 
 
-        Label level = new Label("You chose level: " + Main.level);
+        Label level = new Label("You chose the " + Main.level +" level");
         level.setLayoutX(30);
-        level.setLayoutY(30);
-        level.setFont(new Font(35));
+        level.setLayoutY(90);
+        Font font2 = Font.loadFont(getClass().getResourceAsStream("ElectricFont2.ttf"), 40);
+        level.setFont(font2);
 
 
-        Label nametext = new Label(Main.username +", save Garrett the Goat!!");
+        Label nametext = new Label(Main.username +" save Garrett the Goat");
         nametext.setLayoutX(30);
-        nametext.setLayoutY(90);
-        nametext.setFont(new Font(45));
+        nametext.setLayoutY(8);
+        font2 = Font.loadFont(getClass().getResourceAsStream("ElectricFont2.ttf"), 60);
+        nametext.setFont(font2);
+       // nametext.setTextFill(Color.GOLD);
+       // nametext.setId("style");
+
         anchorPane.getChildren().addAll(nametext, voltLabel, level);
 
     CircuitBoard newCircuitborard = new CircuitBoard(795, 128, 27, 24, 85, 91, 86, anchorPane);
@@ -270,7 +275,7 @@ public class GameWindowController {
      //  gameResults.printCircleCoordinates();
 
         //test visually the calculateed results of our game
-    /*   Circle circle11 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
+   /*    Circle circle11 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle12 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_2().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle13 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle14 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_2().getY(),Main.KABELRADIUS, Color.RED);
@@ -304,7 +309,7 @@ public class GameWindowController {
         Circle circle42 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_2().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle43 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel2_1().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle44 = new Circle(hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel2_2().getX(),hardQuestion.getHardQuestions()[0].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);*/
-    //  anchorPane.getChildren().addAll(circle11,circle12,circle13, circle14,circle21,circle22,circle23, circle24,circle31,circle32,circle33, circle34, circle41,circle42,circle43, circle44);
+   //  anchorPane.getChildren().addAll(circle11,circle12,circle13, circle14,circle21,circle22,circle23, circle24,circle31,circle32,circle33, circle34, circle41,circle42,circle43, circle44);
         //anchorPane.getChildren().addAll(circle11,circle12,circle13, circle14);
       //  anchorPane.getChildren().addAll(circle11,circle12,circle13, circle14,circle21,circle22,circle23, circle24);
 
