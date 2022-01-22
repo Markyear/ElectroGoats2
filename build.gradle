@@ -8,6 +8,7 @@ javafx {
     version = "17.0.1"
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.media' ]
 }
+
 mainClassName = 'Main'
 group 'org.example'
 version '1.0-SNAPSHOT'
