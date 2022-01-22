@@ -17,7 +17,7 @@ public class Main extends Application {
     public static String username = "";
     public enum Level {easy, ok, hard};
     public static Level level;
-    public static int easyWhichQuestion = 1;
+    public static int easyWhichQuestion = 3;
     public static int okWhichQuestion = 0;
     public static int hardWhichQuestion = 0;
     public static Questions thisGameQuestion;

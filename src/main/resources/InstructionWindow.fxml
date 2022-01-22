@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorpane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InstructionsController">
+<AnchorPane fx:id="anchorpane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InstructionsController">
    <children>
       <Label fx:id="headline" layoutX="224.0" layoutY="58.0" text="INSTRUCTIONS">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="text" layoutX="216.0" layoutY="106.0" prefHeight="213.0" prefWidth="222.0" text="bla bla bla do this and that">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+      <TextArea editable="false" layoutX="37.0" layoutY="120.0" prefHeight="237.0" prefWidth="527.0" text="Garrett the Goat is in big trouble!&#10;Only you can help him, so you better get it together!&#10;&#10;Save him from being electrocuted by completing the exercises.&#10;Read the instructions carefully (Garrett’s life depends on it), consider the code &#10;(if there is any) and get to work!&#10;Connect the microcontroller, the network board and the multimeter with all the necessary &#10;cables. Pay particular attention to the Pins, the voltage and the requested Ohm. &#10;If you feel particularly confident, try the medium or hard level, but keep in mind, &#10;that sweet lil Garrett could get killed if you mess it up.&#10;&#10;Good Luck!&#10;" />
+      
+
+
+
+
+
    </children>
 </AnchorPane>

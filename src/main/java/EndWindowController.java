@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-
 import javax.imageio.ImageIO;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -270,7 +270,7 @@ public class GameWindowController {
      //  gameResults.printCircleCoordinates();
 
         //test visually the calculateed results of our game
-    /*   Circle circle11 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
+     /*  Circle circle11 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle12 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel1_2().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle13 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_1().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_1().getY(),Main.KABELRADIUS, Color.RED);
         Circle circle14 = new Circle(easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_2().getX(),easyQuestion.getEasyQuestions()[1].getResult().get(0).getPinForKabel2_2().getY(),Main.KABELRADIUS, Color.RED);
