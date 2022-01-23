@@ -6,15 +6,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 // to uses media it hast to be added at modules in gradle -> 'javafx.media'
 // https://stackoverflow.com/questions/62171410/error-package-javafx-scene-media-does-not-exist
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
@@ -102,6 +105,8 @@ public class GameWindowController {
     Pins[][] kabelstorageArray;
     Pins[][] multimeterArray;
     ArrayList<Kabel> gameResultKabelArray = new ArrayList<>();
+
+    Rectangle realProgress;
 
 
     public void initialize() throws FileNotFoundException {
@@ -269,6 +274,11 @@ public class GameWindowController {
         Kabel kabel20 = new Kabel(383 +8*whereplus, 763+whereplus, Color.TURQUOISE, anchorPane);
         setAllMouseEvents(kabel20, gameResults);
 
+        Rectangle progress = new Rectangle(1250, 500, questionForThisGame.getResult().size()*25, 25);
+        progress.setStroke(Color.BLACK);
+        progress.setFill(Color.TRANSPARENT);
+        anchorPane.getChildren().add(progress);
+
        // Circle circletest1 = new Circle(1281+Main.TILE_SIZE/2, 175+Main.TILE_SIZE/2, Main.KABELRADIUS, Color.RED);
        // anchorPane.getChildren().add(circletest1);
 
@@ -351,6 +361,7 @@ public class GameWindowController {
 
     private EventHandler<MouseEvent> mouseDroppedEventHandler = (t)->
     {
+
         Circle c = (Circle) (t.getSource());
 
         //Kabel wird mittig auf Pin gesetzt, Pin wird auf "besetzt" gesetzt
@@ -374,7 +385,14 @@ public class GameWindowController {
 
             mediaPlayergoatOK.play();
 
-        }};
+        }
+        try {
+            fillTheProgress(whatsTheProgress(gameResults));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    };
 
 //Methode um Pin zu finden auf den das Kabel mittels Maus gerade gezogen wurde
     private Pins whatPinToPutKableOn(double sceneX, double sceneY) {
@@ -482,6 +500,36 @@ public class GameWindowController {
         }
         return null;
     }
+    //Methode um den progress anzuzeigen
+    //Wenn das Kabel sich nicht mehr im Kabel storage befindet und auch nicht beim Multimeter
+    //gesteckt ist wird es als gesteckt gezählt
+    private int whatsTheProgress(GameResults gameResults){
+        int result = 0;
+        ArrayList<Kabel> checkTheCables = gameResults.getSetKabelarray();
+        for (Kabel k : checkTheCables){
+            if (k.getCircle1().getCenterY()<750 &&k.getCircle1().getCenterX()<1285 && k.getCircle2().getCenterY()<750 &&k.getCircle2().getCenterX()<1285){
+                result++;
+            }
+        }
+        return result;
+    }
+
+    private void fillTheProgress(int setkables) throws FileNotFoundException {
+        int cableset = 0;
+        anchorPane.getChildren().remove(realProgress);
+        if (setkables>questionForThisGame.getResult().size()){
+            cableset =questionForThisGame.getResult().size();
+        }
+        else {
+            cableset=setkables;
+        }
+        realProgress = new Rectangle(1250, 500, cableset*25, 25);
+        javafx.scene.image.Image img = new javafx.scene.image.Image(new FileInputStream("src/main/resources/BackgroundPictures/hay.jpeg"));
+        realProgress.setFill(new ImagePattern(img));
+        anchorPane.getChildren().add(realProgress);
+
+    }
+
 //Mouseevent für die Kreise von den Kabel werden gesetzt + werden in das Überprüfungsarray gegeben
     private void setAllMouseEvents(Kabel kabel, GameResults gameResults){
         gameResults.getSetKabelarray().add(kabel);
